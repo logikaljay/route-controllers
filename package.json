@@ -1,0 +1,12 @@
+{
+  "name": "route-controllers",
+  "version": "0.0.1",
+  "description": "Use opinionated controllers as express routes",
+  "keywords": ["express", "opinionated", "controllers", "routes"],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jay Baker",
+  "license": "MIT"
+}
