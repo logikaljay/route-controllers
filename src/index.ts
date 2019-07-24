@@ -4,5 +4,3 @@ export { setHttpMethodNameMapper } from './utils/httpMethod'
 
 export default generateRouter
 export * from './utils/attributes'
-
-generateRouter([])

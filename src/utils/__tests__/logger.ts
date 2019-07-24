@@ -6,6 +6,7 @@ export interface ILogger {
 }
 
 export let logger: ILogger = console
+
 export const setLogger = (
   _logger: ILogger
 ) => {
