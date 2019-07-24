@@ -1,6 +1,6 @@
-import { Controller } from "../../utils/attributes"
+import { Controller } from "../../"
 
-@Controller("/fuck")
+@Controller("/test")
 export default class BasicController {
   public async GetTest(): Promise<string> {
     return "";

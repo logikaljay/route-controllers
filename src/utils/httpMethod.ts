@@ -1,4 +1,4 @@
-export const deduceMethodFromName = (name: string) => {
+let deduceMethodFromName = (name: string): string => {
   name = name.toLowerCase()
   if (name.startsWith('get')) {
     return 'get'
@@ -18,3 +18,9 @@ export const deduceMethodFromName = (name: string) => {
   
   return 'get'
 }
+
+export const setHttpMethodNameMapper = (fn: (name: string) => string) => {
+  deduceMethodFromName = fn
+}
+
+export { deduceMethodFromName }

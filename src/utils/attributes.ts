@@ -20,3 +20,9 @@ export function HttpMethod(method, path): Function {
     Reflect.defineMetadata('Method', { method, path }, target, propertyKey)
   }
 }
+
+export function Middleware(middleware: Function[]): Function {
+  return (target: any, propertyKey: string) => {
+    Reflect.defineMetadata('Middleware', middleware, target, propertyKey)
+  }
+}
