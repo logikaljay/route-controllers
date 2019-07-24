@@ -1,6 +1,6 @@
 {
   "name": "route-controllers",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Use opinionated controllers as express routes",
   "keywords": [
     "express",
@@ -8,7 +8,9 @@
     "controllers",
     "routes"
   ],
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "main": "lib/index.js",
   "scripts": {
     "prepublishOnly": "tsc",
@@ -34,5 +36,8 @@
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
+  },
+  "optionalDependencies": {
+    "bpc": "0.0.1"
   }
 }
