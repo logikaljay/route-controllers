@@ -9,16 +9,16 @@ import * as express from "express"
 import GenerateRouter, { Middleware } from "route-controllers"
 
 class TestController {
-  public async GetTest(name: string): Promise<string> => {
+  public async GetTest(name: string): Promise<string> {
     return `Hi ${name}`
   }
 
   @HttpMethod("post")
-  public async AnotherTest(name: string): Promis<string> => {
+  public async AnotherTest(name: string): Promis<string> {
     return `Created ${name}`
   }
 
-  public async GetJsonTest(name: string): Promise<object> => {
+  public async GetJsonTest(name: string): Promise<object> {
     return {
       "greeting": `Hi ${name}`
     }
