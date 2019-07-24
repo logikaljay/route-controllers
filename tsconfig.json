@@ -13,6 +13,6 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
   },
-  "exclude": ["node_modules", "lib", "jest.config.js", "src/__tests__"],
+  "exclude": ["node_modules", "lib", "jest.config.js"],
   "lib": ["es2015"]
 }
