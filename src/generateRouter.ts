@@ -2,11 +2,20 @@ import * as express from 'express'
 import { deduceMethodFromName } from './utils/httpMethod'
 import { buildRoute } from './buildRoute'
 
-export const generateRouter = (controllers: any[]) => {
+export const generateRouter = (controllers: any[], container = null) => {
   var router = express.Router()
 
   for (var controller of controllers) {
     const instance = new controller()
+
+    if (container) {
+      // check to see if developer is using inversify to inject any dependencies
+      const injectables = Reflect.getMetadata("inversify:tagged_props", controller)
+      for (let injectable of Object.keys(injectables)) {
+        instance[injectable] = container.get(injectables[injectable][0].value)
+      }
+    }
+
     const methods = Reflect.ownKeys(Reflect.getPrototypeOf(instance))
       .filter(f => f !== 'constructor')
 
@@ -28,7 +37,7 @@ export const generateRouter = (controllers: any[]) => {
       }
 
       let httpMethod = Reflect.getMetadata('Method', instance, method)
-      let route = httpMethod ? `${controller.basePath}${httpMethod.path}` : `${controller.basePath}/${method}`
+      let route = httpMethod ? `${controller.basePath}${httpMethod.path || method}` : `${controller.basePath}/${method}`
 
       if (!httpMethod) {
         httpMethod = deduceMethodFromName(method)
