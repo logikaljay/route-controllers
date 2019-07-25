@@ -1,6 +1,6 @@
 {
   "name": "route-controllers",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Use opinionated controllers as express routes",
   "keywords": [
     "express",
