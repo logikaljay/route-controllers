@@ -36,11 +36,15 @@ export const generateRouter = (controllers: any[], container = null) => {
         Reflect.defineMetadata('ParameterMapper', params, handler)
       }
 
-      let httpMethod = Reflect.getMetadata('Method', instance, method)
-      let route = httpMethod ? `${controller.basePath}${httpMethod.path || method}` : `${controller.basePath}/${method}`
+      let methodMetadata = Reflect.getMetadata('Method', instance, method)
+      let route = methodMetadata 
+        ? `${controller.basePath}/${methodMetadata.path || method}` 
+        : `${controller.basePath}/${method}`
 
-      if (!httpMethod) {
-        httpMethod = deduceMethodFromName(method)
+      if (!methodMetadata) {
+        methodMetadata = {
+          method: deduceMethodFromName(method)
+        }
       }
 
       let middleware = Reflect.getMetadata('Middleware', instance, method)
@@ -48,7 +52,7 @@ export const generateRouter = (controllers: any[], container = null) => {
         middleware = []
       }
 
-      router[httpMethod](route, ...middleware, buildRoute(handler))
+      router[methodMetadata.method](route, ...middleware, buildRoute(handler))
     }
   }
 
