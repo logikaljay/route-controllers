@@ -1,6 +1,6 @@
 import * as express from "express"
 
-export const buildRoute = handler => async (req: express.Request, res, next) => {
+export const buildRoute = (instance, handler) => async (req: express.Request, res, next) => {
   try {
     var params = Object.assign(
       {},
@@ -26,6 +26,16 @@ export const buildRoute = handler => async (req: express.Request, res, next) => 
       else {
         input.push(params[key])
       }
+    }
+
+    const httpContext = Reflect.getMetadata("HttpContext", req);
+    if (httpContext && httpContext.container) {
+        instance.httpContext = httpContext
+
+        const injectables = Reflect.getMetadata("inversify:tagged_props", instance.constructor);
+        for (let injectable of Object.keys(injectables)) {
+            instance[injectable] = httpContext.container.get(injectables[injectable][0].value);
+        }
     }
 
     var result = await handler(...input)
