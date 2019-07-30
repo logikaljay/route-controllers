@@ -30,12 +30,12 @@ export const buildRoute = (instance, handler) => async (req: express.Request, re
 
     const httpContext = Reflect.getMetadata("HttpContext", req);
     if (httpContext && httpContext.container) {
-        instance.httpContext = httpContext
+      instance.httpContext = httpContext
 
-        const injectables = Reflect.getMetadata("inversify:tagged_props", instance.constructor);
-        for (let injectable of Object.keys(injectables)) {
-            instance[injectable] = httpContext.container.get(injectables[injectable][0].value);
-        }
+      const injectables = Reflect.getMetadata("inversify:tagged_props", instance.constructor);
+      for (let injectable of Object.keys(injectables)) {
+        instance[injectable] = httpContext.container.get(injectables[injectable][0].value);
+      }
     }
 
     var result = await handler(...input)
